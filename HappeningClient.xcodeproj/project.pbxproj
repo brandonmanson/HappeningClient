@@ -13,8 +13,8 @@
 		94C4E5991D33E0B600EAFC9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94C4E5971D33E0B600EAFC9A /* Main.storyboard */; };
 		94C4E59B1D33E0B600EAFC9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94C4E59A1D33E0B600EAFC9A /* Assets.xcassets */; };
 		94C4E59E1D33E0B600EAFC9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94C4E59C1D33E0B600EAFC9A /* LaunchScreen.storyboard */; };
-		94F490C81D4120F8000FB399 /* JWTDecode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94F490C71D4120F8000FB399 /* JWTDecode.framework */; };
 		94F490CA1D414174000FB399 /* HappeningJWTDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F490C91D414174000FB399 /* HappeningJWTDecoder.swift */; };
+		94F490CC1D414BA4000FB399 /* JWTDecode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94F490CB1D414BA4000FB399 /* JWTDecode.framework */; };
 		E0263B9A949B6D81669D53E1 /* Pods_HappeningClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64BB997B0AB07684A929148E /* Pods_HappeningClient.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +35,7 @@
 		94F490C41D411F68000FB399 /* HappeningClient-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HappeningClient-Bridging-Header.h"; sourceTree = "<group>"; };
 		94F490C71D4120F8000FB399 /* JWTDecode.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JWTDecode.framework; path = "Pods/../build/Debug-iphoneos/JWTDecode/JWTDecode.framework"; sourceTree = "<group>"; };
 		94F490C91D414174000FB399 /* HappeningJWTDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HappeningJWTDecoder.swift; sourceTree = "<group>"; };
+		94F490CB1D414BA4000FB399 /* JWTDecode.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JWTDecode.framework; path = "../../../Library/Developer/Xcode/DerivedData/HappeningClient-cvtopxbvgizhbudlczpxasqytztb/Build/Products/Debug-iphonesimulator/JWTDecode/JWTDecode.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,7 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				94F490C81D4120F8000FB399 /* JWTDecode.framework in Frameworks */,
+				94F490CC1D414BA4000FB399 /* JWTDecode.framework in Frameworks */,
 				E0263B9A949B6D81669D53E1 /* Pods_HappeningClient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -53,6 +54,7 @@
 		296933ABA5DED86CD7E49994 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				94F490CB1D414BA4000FB399 /* JWTDecode.framework */,
 				94F490C71D4120F8000FB399 /* JWTDecode.framework */,
 				64BB997B0AB07684A929148E /* Pods_HappeningClient.framework */,
 			);

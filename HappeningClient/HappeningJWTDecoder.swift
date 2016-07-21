@@ -14,12 +14,8 @@ class HappeningJWTDecoder: NSObject {
     
     func returnUserId(jwtString: String) -> Int {
         do {
-            print("inside the do block")
             let jwt = try decode(jwtString)
-            print("jwt: \(jwt)")
-            print("body: \(jwt.body)")
             if let j = jwt.subject {
-                print("jwt.subject is not nil. subject: \(jwt.subject)")
                 userId = j
             }
         }

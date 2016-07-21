@@ -7,8 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import <Lock/Lock.h>
-#import "Auth0App.h"
 #import <AFNetworkActivityLogger/AFNetworkActivityLogger.h>
 
 
@@ -21,8 +19,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    A0Lock *lock = [[Auth0App sharedInstance] lock];
-    [lock applicationLaunchedWithOptions:launchOptions];
     [[AFNetworkActivityLogger sharedLogger] startLogging];
     return YES;
 }
