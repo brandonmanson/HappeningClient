@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -17,12 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9wY-wf-XuF">
-                                <rect key="frame" x="120" y="289" width="329" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4OO-mO-OeH">
                                 <rect key="frame" x="237" y="371" width="95" height="30"/>
                                 <state key="normal" title="API REQUEST"/>
@@ -30,11 +25,54 @@
                                     <action selector="apiRequestButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RZm-Fz-S4s"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IZn-wY-2hQ">
+                                <rect key="frame" x="251" y="448" width="66" height="30"/>
+                                <state key="normal" title="Get Email"/>
+                                <connections>
+                                    <action selector="getEmailButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mQ3-Ts-P7s"/>
+                                </connections>
+                            </button>
+                            <datePicker contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="4kg-0X-XB5">
+                                <rect key="frame" x="20" y="28" width="560" height="227"/>
+                                <date key="date" timeIntervalSinceReferenceDate="490892644.71048498">
+                                    <!--2016-07-22 15:04:04 +0000-->
+                                </date>
+                            </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GFD-Xg-n4V">
+                                <rect key="frame" x="20" y="289" width="80" height="30"/>
+                                <state key="normal" title="Check Date"/>
+                                <connections>
+                                    <action selector="checkDateButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vBb-bq-f6n"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pkg-LZ-RgJ">
+                                <rect key="frame" x="180" y="289" width="101" height="30"/>
+                                <state key="normal" title="Set Start Date"/>
+                                <connections>
+                                    <action selector="checkDateButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CgZ-lf-nPD"/>
+                                    <action selector="setStartDateButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="83G-T6-znw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FN3-Da-CFB">
+                                <rect key="frame" x="289" y="289" width="101" height="30"/>
+                                <state key="normal" title="Set End Date"/>
+                                <connections>
+                                    <action selector="checkDateButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TVT-IM-QMD"/>
+                                    <action selector="setEndDateButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hBo-IN-6i1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="leadingMargin" secondItem="GFD-Xg-n4V" secondAttribute="leading" id="0g2-kP-SXi"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="4kg-0X-XB5" secondAttribute="leading" id="7x0-zA-8Oe"/>
+                            <constraint firstItem="4kg-0X-XB5" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="PZK-Kz-BGI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="4kg-0X-XB5" secondAttribute="trailing" id="bK6-VH-jRl"/>
+                            <constraint firstItem="GFD-Xg-n4V" firstAttribute="top" secondItem="4kg-0X-XB5" secondAttribute="bottom" constant="34" id="eQb-m5-IL9"/>
+                        </constraints>
                     </view>
                     <connections>
-                        <outlet property="usernameLabel" destination="9wY-wf-XuF" id="BeI-Sr-hAf"/>
+                        <outlet property="datePicker" destination="4kg-0X-XB5" id="mRr-cK-9D8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
