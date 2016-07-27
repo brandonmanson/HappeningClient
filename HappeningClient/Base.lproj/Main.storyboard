@@ -23,10 +23,10 @@
             </objects>
             <point key="canvasLocation" x="305" y="357"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Happenings Table View Controller-->
         <scene sceneID="Tbv-gH-e2O">
             <objects>
-                <tableViewController id="Ln8-Mb-22b" sceneMemberID="viewController">
+                <tableViewController id="Ln8-Mb-22b" customClass="HappeningsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="oWv-Dj-85d">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -40,7 +40,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="0of-eO-hWi" kind="show" id="BT7-xc-Y67"/>
+                                    <segue destination="0of-eO-hWi" kind="show" identifier="viewScheduleForHappeningSegue" id="BT7-xc-Y67"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -49,16 +49,40 @@
                             <outlet property="delegate" destination="Ln8-Mb-22b" id="ldO-G8-Hx4"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="XXY-cg-aST"/>
+                    <navigationItem key="navigationItem" id="XXY-cg-aST">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="wUt-uW-Qd4">
+                            <connections>
+                                <segue destination="ydB-N8-k44" kind="show" identifier="createHappeningSegue" id="v0a-Zd-pgT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sTB-Cg-wwk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1007" y="357"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Create Happening View Controller-->
+        <scene sceneID="Qe8-9M-zv1">
+            <objects>
+                <viewController id="ydB-N8-k44" customClass="CreateHappeningViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Oxe-5f-YE0"/>
+                        <viewControllerLayoutGuide type="bottom" id="SAe-kh-8ls"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pc4-ZR-R9I">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TqQ-JG-5OV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1711" y="-310"/>
+        </scene>
+        <!--Days Table View Controller-->
         <scene sceneID="Urm-OH-BjL">
             <objects>
-                <tableViewController id="0of-eO-hWi" sceneMemberID="viewController">
+                <tableViewController id="0of-eO-hWi" customClass="DaysTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="5x3-e6-V9c">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -72,7 +96,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="Xcg-Li-BIY" kind="show" id="IlY-UP-dpa"/>
+                                    <segue destination="Xcg-Li-BIY" kind="show" identifier="viewEventsForDaySegue" id="IlY-UP-dpa"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -86,10 +110,28 @@
             </objects>
             <point key="canvasLocation" x="1707" y="357"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Create Event View Controller-->
+        <scene sceneID="0Jq-Qe-XsN">
+            <objects>
+                <viewController id="N2A-Uv-NxC" customClass="CreateEventViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5rb-Ts-WqQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="ipc-6N-GVf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="d6y-Bp-w9n">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ODW-4h-dO2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3085" y="-310"/>
+        </scene>
+        <!--Events-->
         <scene sceneID="iBA-fr-ZU9">
             <objects>
-                <tableViewController id="Xcg-Li-BIY" sceneMemberID="viewController">
+                <tableViewController id="Xcg-Li-BIY" customClass="EventsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Zc9-kU-6yI">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -109,6 +151,13 @@
                             <outlet property="delegate" destination="Xcg-Li-BIY" id="q7t-20-xGT"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Events" id="sfc-63-GfU">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="w7v-KE-H3z">
+                            <connections>
+                                <segue destination="N2A-Uv-NxC" kind="show" identifier="createNewEventSegue" id="wB6-Gp-8Ig"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uzd-B7-4ko" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
