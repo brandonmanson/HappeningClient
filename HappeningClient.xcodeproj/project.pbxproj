@@ -15,6 +15,12 @@
 		94C4E59E1D33E0B600EAFC9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94C4E59C1D33E0B600EAFC9A /* LaunchScreen.storyboard */; };
 		94F490CA1D414174000FB399 /* HappeningJWTDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F490C91D414174000FB399 /* HappeningJWTDecoder.swift */; };
 		94F490CC1D414BA4000FB399 /* JWTDecode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94F490CB1D414BA4000FB399 /* JWTDecode.framework */; };
+		94F490CF1D495B3F000FB399 /* HappeningsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F490CE1D495B3F000FB399 /* HappeningsTableViewController.m */; };
+		94F490D31D495B5F000FB399 /* DaysTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F490D21D495B5F000FB399 /* DaysTableViewController.m */; };
+		94F490D61D495B6F000FB399 /* EventsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F490D51D495B6F000FB399 /* EventsTableViewController.m */; };
+		94F490D91D495BAC000FB399 /* CreateHappeningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F490D81D495BAC000FB399 /* CreateHappeningViewController.m */; };
+		94F490DC1D495BBD000FB399 /* CreateEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F490DB1D495BBD000FB399 /* CreateEventViewController.m */; };
+		94F490DF1D495BD9000FB399 /* EventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F490DE1D495BD9000FB399 /* EventDetailViewController.m */; };
 		E0263B9A949B6D81669D53E1 /* Pods_HappeningClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64BB997B0AB07684A929148E /* Pods_HappeningClient.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +42,18 @@
 		94F490C71D4120F8000FB399 /* JWTDecode.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JWTDecode.framework; path = "Pods/../build/Debug-iphoneos/JWTDecode/JWTDecode.framework"; sourceTree = "<group>"; };
 		94F490C91D414174000FB399 /* HappeningJWTDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HappeningJWTDecoder.swift; sourceTree = "<group>"; };
 		94F490CB1D414BA4000FB399 /* JWTDecode.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JWTDecode.framework; path = "../../../Library/Developer/Xcode/DerivedData/HappeningClient-cvtopxbvgizhbudlczpxasqytztb/Build/Products/Debug-iphonesimulator/JWTDecode/JWTDecode.framework"; sourceTree = "<group>"; };
+		94F490CD1D495B3F000FB399 /* HappeningsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HappeningsTableViewController.h; sourceTree = "<group>"; };
+		94F490CE1D495B3F000FB399 /* HappeningsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HappeningsTableViewController.m; sourceTree = "<group>"; };
+		94F490D11D495B5F000FB399 /* DaysTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaysTableViewController.h; sourceTree = "<group>"; };
+		94F490D21D495B5F000FB399 /* DaysTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DaysTableViewController.m; sourceTree = "<group>"; };
+		94F490D41D495B6F000FB399 /* EventsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsTableViewController.h; sourceTree = "<group>"; };
+		94F490D51D495B6F000FB399 /* EventsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsTableViewController.m; sourceTree = "<group>"; };
+		94F490D71D495BAC000FB399 /* CreateHappeningViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateHappeningViewController.h; sourceTree = "<group>"; };
+		94F490D81D495BAC000FB399 /* CreateHappeningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateHappeningViewController.m; sourceTree = "<group>"; };
+		94F490DA1D495BBD000FB399 /* CreateEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateEventViewController.h; sourceTree = "<group>"; };
+		94F490DB1D495BBD000FB399 /* CreateEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateEventViewController.m; sourceTree = "<group>"; };
+		94F490DD1D495BD9000FB399 /* EventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailViewController.h; sourceTree = "<group>"; };
+		94F490DE1D495BD9000FB399 /* EventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +111,7 @@
 				94C4E59F1D33E0B600EAFC9A /* Info.plist */,
 				94C4E58E1D33E0B600EAFC9A /* Supporting Files */,
 				94F490C41D411F68000FB399 /* HappeningClient-Bridging-Header.h */,
+				94F490D01D495B48000FB399 /* Controllers */,
 			);
 			path = HappeningClient;
 			sourceTree = "<group>";
@@ -103,6 +122,25 @@
 				94C4E58F1D33E0B600EAFC9A /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		94F490D01D495B48000FB399 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				94F490CD1D495B3F000FB399 /* HappeningsTableViewController.h */,
+				94F490CE1D495B3F000FB399 /* HappeningsTableViewController.m */,
+				94F490D11D495B5F000FB399 /* DaysTableViewController.h */,
+				94F490D21D495B5F000FB399 /* DaysTableViewController.m */,
+				94F490D41D495B6F000FB399 /* EventsTableViewController.h */,
+				94F490D51D495B6F000FB399 /* EventsTableViewController.m */,
+				94F490D71D495BAC000FB399 /* CreateHappeningViewController.h */,
+				94F490D81D495BAC000FB399 /* CreateHappeningViewController.m */,
+				94F490DA1D495BBD000FB399 /* CreateEventViewController.h */,
+				94F490DB1D495BBD000FB399 /* CreateEventViewController.m */,
+				94F490DD1D495BD9000FB399 /* EventDetailViewController.h */,
+				94F490DE1D495BD9000FB399 /* EventDetailViewController.m */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		CF766AE3422A8B9761367144 /* Pods */ = {
@@ -235,10 +273,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94F490D61D495B6F000FB399 /* EventsTableViewController.m in Sources */,
 				94C4E5931D33E0B600EAFC9A /* AppDelegate.m in Sources */,
 				94C4E5901D33E0B600EAFC9A /* main.m in Sources */,
+				94F490CF1D495B3F000FB399 /* HappeningsTableViewController.m in Sources */,
+				94F490DC1D495BBD000FB399 /* CreateEventViewController.m in Sources */,
 				947A06F81D3D5533001335C6 /* ViewController.m in Sources */,
+				94F490DF1D495BD9000FB399 /* EventDetailViewController.m in Sources */,
+				94F490D31D495B5F000FB399 /* DaysTableViewController.m in Sources */,
 				94F490CA1D414174000FB399 /* HappeningJWTDecoder.swift in Sources */,
+				94F490D91D495BAC000FB399 /* CreateHappeningViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
