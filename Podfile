@@ -10,5 +10,6 @@ target 'HappeningClient' do
   pod 'SimpleKeychain'
   pod 'JWTDecode', '~> 1.0'
   pod 'AFNetworkActivityLogger', :git => 'https://github.com/AFNetworking/AFNetworkActivityLogger.git', :branch => '3_0_0'
+  pod 'ISO8601DateFormatter', '~> 0.8'
 
 end

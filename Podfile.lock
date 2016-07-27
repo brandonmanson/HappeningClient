@@ -24,6 +24,7 @@ PODS:
     - CocoaLumberjack/Core
   - CocoaLumberjack/Extensions (2.3.0):
     - CocoaLumberjack/Default
+  - ISO8601DateFormatter (0.8)
   - JWTDecode (1.0.0)
   - Lock (1.26.0):
     - CocoaLumberjack (~> 2.0)
@@ -48,6 +49,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworkActivityLogger (from `https://github.com/AFNetworking/AFNetworkActivityLogger.git`, branch `3_0_0`)
+  - ISO8601DateFormatter (~> 0.8)
   - JWTDecode (~> 1.0)
   - Lock (~> 1.26)
   - SimpleKeychain
@@ -66,11 +68,12 @@ SPEC CHECKSUMS:
   AFNetworkActivityLogger: e77f68d014becb33c4306a23f56a64906ff72670
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
+  ISO8601DateFormatter: 4551b6ce4f83185425f583b0b3feb3c7b59b942c
   JWTDecode: d172edcb1607cc15aed85d58eceedcbb675a4534
   Lock: d863c3aebe57d2e8f3e5f40c9c5ba695ec2f1162
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
   SimpleKeychain: b50cef3b87939d480ea1143425c00f5b4b70fe21
 
-PODFILE CHECKSUM: 8c40c1a672f6363d49c255c17b33488cc4df8ef3
+PODFILE CHECKSUM: 95eaa570059fa66b84338eec724da22c79632808
 
 COCOAPODS: 1.0.1
