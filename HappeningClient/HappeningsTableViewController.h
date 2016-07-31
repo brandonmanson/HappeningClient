@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CreateHappeningViewController.h"
 
-@interface HappeningsTableViewController : UITableViewController
+@interface HappeningsTableViewController : UITableViewController <happeningTableViewDelegate>
+
 
 @end
