@@ -146,6 +146,7 @@
     NSDictionary *happeningData = @{@"happening": @{@"name": _happeningNameTextField.text, @"start_date": startDate, @"end_date": endDate}};
     [self generateDatesBetweenStartDate:_startDate andEndDate:_endDate];
     [self createHappeningAndDatesWithData:happeningData];
+    [_delegate getNewHappeningsAndReloadView];
     
 }
 
