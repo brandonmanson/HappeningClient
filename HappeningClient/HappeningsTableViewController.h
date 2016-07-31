@@ -11,5 +11,6 @@
 
 @interface HappeningsTableViewController : UITableViewController <happeningTableViewDelegate>
 
+@property (strong, nonatomic) NSMutableArray *happenings;
 
 @end
