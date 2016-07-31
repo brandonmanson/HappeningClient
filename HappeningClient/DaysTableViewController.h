@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Day.h"
+#import "Happening.h"
+#import "Event.h"
+#import "EventDetailViewController.h"
 
 @interface DaysTableViewController : UITableViewController
+
+
 
 @end
