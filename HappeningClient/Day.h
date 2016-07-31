@@ -10,4 +10,10 @@
 
 @interface Day : NSObject
 
+@property (strong, nonatomic) NSDate *date;
+@property (strong, nonatomic) NSMutableArray *events;
+
+- (id)initWithDate:(NSDate *)date;
++ (id)initWithDate:(NSDate *)date;
+
 @end

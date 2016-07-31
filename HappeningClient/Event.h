@@ -10,4 +10,11 @@
 
 @interface Event : NSObject
 
+@property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) NSDate *startTime;
+@property (strong, nonatomic) NSString *eventDescription;
+
+- (id)initWithName:(NSString *)name beginningAt:(NSDate *)startTime withDescription:(NSString *)description;
++ (id)initWithName:(NSString *)name beginningAt:(NSDate *)startTime withDescription:(NSString *)description;
+
 @end

@@ -10,4 +10,18 @@
 
 @implementation ListForHappening
 
+- (id)initWithListName:(NSString *)name {
+    self = [super init];
+    
+    if (self) {
+        _name = name;
+    }
+    return self;
+}
+
++ (id)initWithListName:(NSString *)name {
+    return [[super alloc] initWithListName:name];
+    
+}
+
 @end

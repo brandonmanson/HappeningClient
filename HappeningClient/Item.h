@@ -10,4 +10,9 @@
 
 @interface Item : NSObject
 
+@property (strong, nonatomic) NSString *itemDescription;
+
+- (id)initWithItemDescription:(NSString *)description;
++ (id)initWithItemDescription:(NSString *)description;
+
 @end

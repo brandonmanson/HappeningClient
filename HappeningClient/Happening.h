@@ -10,4 +10,13 @@
 
 @interface Happening : NSObject
 
+@property (nonatomic) int happeningId;
+@property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) NSDate *startDate;
+@property (strong, nonatomic) NSDate *endDate;
+@property (strong, nonatomic) NSMutableArray *days;
+
+- (id)initWithName:(NSString *)name onDate:(NSDate *)startDate endingOn:(NSString *)endDate withId:(int)happeningId;
++ (id)initWithName:(NSString *)name onDate:(NSDate *)startDate endingOn:(NSString *)endDate withId:(int)happeningId;
+
 @end

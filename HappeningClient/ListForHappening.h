@@ -10,4 +10,10 @@
 
 @interface ListForHappening : NSObject
 
+@property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) NSMutableArray *items;
+
+- (id)initWithListName:(NSString *)name;
++ (id)initWithListName:(NSString *)name;
+
 @end

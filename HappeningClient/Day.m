@@ -10,4 +10,17 @@
 
 @implementation Day
 
+- (id)initWithDate:(NSDate *)date {
+    self = [super init];
+    
+    if (self) {
+        _date = date;
+    }
+    return self;
+}
+
++ (id)initWithDate:(NSDate *)date {
+    return [[super alloc] initWithDate:date];
+}
+
 @end

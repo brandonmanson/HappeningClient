@@ -10,4 +10,18 @@
 
 @implementation Item
 
+- (id)initWithItemDescription:(NSString *)description {
+    self = [super init];
+    
+    if (self) {
+        _itemDescription = description;
+    }
+    
+    return self;
+}
+
++ (id)initWithItemDescription:(NSString *)description {
+    return [[super alloc] initWithItemDescription:description];
+}
+
 @end
