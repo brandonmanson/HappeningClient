@@ -25,4 +25,16 @@ class HappeningJWTDecoder: NSObject {
         }
         return userId
     }
+    
+    func isExpired(jwtString: String) -> Bool {
+        var expirationStatus = Bool();
+        do {
+            let jwt = try decode(jwtString)
+            expirationStatus = jwt.expired
+        } catch let error as NSError {
+            error.localizedDescription
+            print("error: \(error.localizedDescription)")
+        }
+        return expirationStatus
+    }
 }

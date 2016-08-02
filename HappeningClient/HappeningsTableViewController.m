@@ -11,6 +11,9 @@
 #import "Happening.h"
 #import "DaysTableViewController.h"
 #import "CreateHappeningViewController.h"
+#import "AuthenticationViewController.h"
+#import <SimpleKeychain/SimpleKeychain.h>
+#import "HappeningClient-Swift.h"
 
 @interface HappeningsTableViewController ()
 
@@ -34,11 +37,27 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    HappeningJWTDecoder *decoder = [[HappeningJWTDecoder alloc] init];
+    A0SimpleKeychain *keychain = [A0SimpleKeychain keychain];
+    NSString *token = [keychain stringForKey:@"token"];
+    
+    if (token == nil || [decoder isExpired:token]) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        AuthenticationViewController *authVC = [storyboard instantiateViewControllerWithIdentifier:@"AuthenticationViewController"];
+        [self presentViewController:authVC animated:YES completion:nil];
+    }
+}
+
 #pragma mark - Delegate Methods
 
 - (void)getNewHappeningsAndReloadView {
     _happenings = [[NSMutableArray alloc] init];
+    A0SimpleKeychain *keychain = [A0SimpleKeychain keychain];
+    NSString *authHeader = [NSString stringWithFormat:@"Bearer %@", [keychain stringForKey:@"token"]];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setValue:authHeader forHTTPHeaderField:@"Authorization"];
     NSString *getHappeningsURL = @"http://localhost:3000/users?id=1";
     
     [manager GET:getHappeningsURL parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -140,9 +159,10 @@
         CreateHappeningViewController *vc = [segue destinationViewController];
         [vc setDelegate:self];
     }
-    
     DaysTableViewController *vc = [segue destinationViewController];
-    
+}
+
+- (IBAction)prepareForUnwind:(UIStoryboardSegue *)segue {
     
 }
 
