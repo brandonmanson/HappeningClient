@@ -9,6 +9,7 @@
 #import "CreateHappeningViewController.h"
 #import <AFNetworking/AFNetworking.h>
 #import <UIKit/UIKit.h>
+#import <SimpleKeychain/SimpleKeychain.h>
 
 @interface CreateHappeningViewController ()
 @property (strong, nonatomic) IBOutlet UITextField *happeningNameTextField;
@@ -105,6 +106,8 @@
 }
 
 - (void)createHappeningAndDatesWithData:(NSDictionary *)happeningData {
+    A0SimpleKeychain *keychain = [A0SimpleKeychain keychain];
+    NSString *authHeader = [NSString stringWithFormat:@"Bearer %@", [keychain stringForKey:@"token"]];
     NSString *createHappeningAPIRoute = @"http://localhost:3000/happenings";
     
     NSString *createDayAPIRoute = @"http://localhost:3000/days";
@@ -114,7 +117,7 @@
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    
+    [manager.requestSerializer setValue:authHeader forHTTPHeaderField:@"Authorization"];
     [manager POST:createHappeningAPIRoute parameters:happeningData progress:nil success:^(NSURLSessionTask *task, id responseObject) {
         NSDictionary *happeningResponseObject = (NSDictionary *)responseObject;
         NSLog(@"Happening created! %@", happeningResponseObject.description);
@@ -138,12 +141,21 @@
 }
 
 - (IBAction)createHappeningButtonPressed:(UIButton *)sender {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd"];
     
     NSString *startDate = [formatter stringFromDate:_startDate];
     NSString *endDate = [formatter stringFromDate:_endDate];
-    NSDictionary *happeningData = @{@"happening": @{@"name": _happeningNameTextField.text, @"start_date": startDate, @"end_date": endDate}};
+    NSDictionary *happeningData = @{@"happening":
+                                        @{@"name": _happeningNameTextField.text,
+                                          @"start_date": startDate,
+                                          @"end_date": endDate,
+                                          @"user_ids": @[
+                                                  [defaults objectForKey:@"id"]
+                                                  ]
+                                          }
+                                    };
     [self generateDatesBetweenStartDate:_startDate andEndDate:_endDate];
     [self createHappeningAndDatesWithData:happeningData];
     [_delegate getNewHappeningsAndReloadView];

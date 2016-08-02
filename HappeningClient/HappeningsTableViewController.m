@@ -54,12 +54,12 @@
 - (void)getNewHappeningsAndReloadView {
     _happenings = [[NSMutableArray alloc] init];
     A0SimpleKeychain *keychain = [A0SimpleKeychain keychain];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *authHeader = [NSString stringWithFormat:@"Bearer %@", [keychain stringForKey:@"token"]];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager.requestSerializer setValue:authHeader forHTTPHeaderField:@"Authorization"];
-    NSString *getHappeningsURL = @"http://localhost:3000/users?id=1";
-    
+    NSString *getHappeningsURL = [NSString stringWithFormat:@"http://localhost:3000/users?id=%@", [defaults stringForKey:@"id"]];
     [manager GET:getHappeningsURL parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSDictionary *response = (NSDictionary *)responseObject;
         for (id key in response) {
@@ -158,8 +158,9 @@
     if ([[segue identifier] isEqualToString:@"createHappeningSegue"]) {
         CreateHappeningViewController *vc = [segue destinationViewController];
         [vc setDelegate:self];
+    } else {        
+        DaysTableViewController *vc = [segue destinationViewController];
     }
-    DaysTableViewController *vc = [segue destinationViewController];
 }
 
 - (IBAction)prepareForUnwind:(UIStoryboardSegue *)segue {
