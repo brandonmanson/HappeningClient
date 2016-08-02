@@ -9,6 +9,7 @@
 #import "AuthenticationViewController.h"
 #import <AFNetworking/AFNetworking.h>
 #import <SimpleKeychain/SimpleKeychain.h>
+#import "HappeningsTableViewController.h"
 
 
 @interface AuthenticationViewController ()
@@ -82,6 +83,7 @@
             [keychain setString:tokenResponseObject[@"jwt"] forKey:@"token"];
             
             NSLog(@"password: %@\ntoken: %@\n", [keychain stringForKey:@"password"], [keychain stringForKey:@"token"]);
+            [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
             
         } failure:^(NSURLSessionDataTask *task, NSError *error) {
             NSLog(@"Error: %@", error.localizedDescription);
@@ -92,8 +94,24 @@
 }
 
 - (void)authenticateExistingUser {
+    // Keychain access for JWT and password
+    A0SimpleKeychain *keychain = [A0SimpleKeychain keychain];
     
+    NSString *authenticateURL = @"http://localhost:3000/user_token";
+    
+    NSDictionary *newTokenParams = @{@"auth": @{@"email": _emailTextBox.text, @"password": _passwordTextBox.text}};
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager POST:authenticateURL parameters:newTokenParams progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSLog(@"token: %@", responseObject[@"jwt"]);
+        [keychain setString:responseObject[@"jwt"] forKey:@"token"];
+        [(HappeningsTableViewController *)self.presentingViewController getNewHappeningsAndReloadView];
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"Error: %@", error.localizedDescription);
+    }];
 }
+     
 - (IBAction)authenticateButtonPressed:(UIButton *)sender {
     if ([_loginOrSignUpSegmentedControl selectedSegmentIndex ] == 0) {
         [self createNewUser];
