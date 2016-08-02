@@ -11,6 +11,7 @@
 #import "Happening.h"
 #import "DaysTableViewController.h"
 #import "CreateHappeningViewController.h"
+#import "AuthenticationViewController.h"
 
 @interface HappeningsTableViewController ()
 
@@ -32,6 +33,16 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    if ([userDefaults objectForKey:@"username"] == nil) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        AuthenticationViewController *authVC = [storyboard instantiateViewControllerWithIdentifier:@"AuthenticationViewController"];
+        [self presentViewController:authVC animated:YES completion:nil];
+    }
 }
 
 #pragma mark - Delegate Methods
@@ -140,9 +151,10 @@
         CreateHappeningViewController *vc = [segue destinationViewController];
         [vc setDelegate:self];
     }
-    
     DaysTableViewController *vc = [segue destinationViewController];
-    
+}
+
+- (IBAction)prepareForUnwind:(UIStoryboardSegue *)segue {
     
 }
 
