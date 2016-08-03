@@ -9,7 +9,7 @@
 #import "HappeningsTableViewController.h"
 #import <AFNetworking/AFNetworking.h>
 #import "Happening.h"
-#import "DaysTableViewController.h"
+#import "DaysViewController.h"
 #import "CreateHappeningViewController.h"
 #import "AuthenticationViewController.h"
 #import <SimpleKeychain/SimpleKeychain.h>
@@ -153,13 +153,15 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     if ([[segue identifier] isEqualToString:@"createHappeningSegue"]) {
         CreateHappeningViewController *vc = [segue destinationViewController];
         [vc setDelegate:self];
     } else {        
-        DaysTableViewController *vc = [segue destinationViewController];
+        DaysViewController *vc = [segue destinationViewController];
+        Happening *selectedHappening = [_happenings objectAtIndex:indexPath.row];
+        NSLog(@"selected Happening: %@", selectedHappening);
+        vc.happeningID = selectedHappening.happeningId;
     }
 }
 

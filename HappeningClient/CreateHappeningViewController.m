@@ -122,11 +122,13 @@
         NSDictionary *happeningResponseObject = (NSDictionary *)responseObject;
         NSLog(@"Happening created! %@", happeningResponseObject.description);
         id happeningId = [happeningResponseObject objectForKey:@"id"];
+        NSLog(@"happening id: %@", happeningId);
         
         for (NSDate *date in _dates) {
             NSLog(@"in for loop");
             NSString *dateString = [formatter stringFromDate:date];
             NSDictionary *newDayObjectData = @{@"day": @{@"date": dateString, @"happening_id": happeningId}};
+            NSLog(@"request params: %@", newDayObjectData.description);
             [manager POST:createDayAPIRoute parameters:newDayObjectData progress:nil success:^(NSURLSessionTask *task, id responseObject) {
                 NSDictionary *response = (NSDictionary *)responseObject;
                 NSLog(@"Day created! %@", response.description);
