@@ -19,10 +19,11 @@
 
 @end
 
-@implementation CreateHappeningViewController
+@implementation CreateHappeningViewController 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     _formatter = [[NSDateFormatter alloc] init];
     [_formatter setDateStyle:NSDateFormatterLongStyle];
     
@@ -136,6 +137,12 @@
                 NSLog(@"Day not created. Error: %@", error.localizedDescription);
             }];
         }
+        if ([self.delegate respondsToSelector:@selector(getNewHappeningsAndReloadView)]) {
+            NSLog(@"Delegate responds to selector");
+            [_delegate getNewHappeningsAndReloadView];
+        } else {
+            NSLog(@"Delegate not responding to selector");
+        }
         
     } failure:^(NSURLSessionTask *task, NSError *error) {
         NSLog(@"Happening not created. Error: %@", error.localizedDescription);
@@ -143,6 +150,7 @@
 }
 
 - (IBAction)createHappeningButtonPressed:(UIButton *)sender {
+    NSLog(@"A delegate :%@",self.delegate);
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd"];
@@ -160,7 +168,6 @@
                                     };
     [self generateDatesBetweenStartDate:_startDate andEndDate:_endDate];
     [self createHappeningAndDatesWithData:happeningData];
-    [_delegate getNewHappeningsAndReloadView];
     
 }
 

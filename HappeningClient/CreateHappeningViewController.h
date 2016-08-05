@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol happeningTableViewDelegate <NSObject>
+@protocol HappeningTableViewDelegate <NSObject>
 
 - (void)getNewHappeningsAndReloadView;
 
@@ -24,7 +24,7 @@
 @property (strong, nonatomic) NSMutableArray *dates;
 @property (strong, nonatomic) NSDate *startDate;
 @property (strong, nonatomic) NSDate *endDate;
-@property (strong, nonatomic) id<happeningTableViewDelegate>delegate;
+@property (strong, nonatomic) id<HappeningTableViewDelegate>delegate;
 
 
 @end

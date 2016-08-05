@@ -14,4 +14,7 @@
 @property (strong, nonatomic) NSString *email;
 @property (nonatomic) int userID;
 
+-(id)initWithUsername:(NSString *)username andEmail:(NSString *)email withRemoteID:(int)remoteID;
++(id)initWithUsername:(NSString *)username andEmail:(NSString *)email withRemoteID:(int)remoteID;
+
 @end

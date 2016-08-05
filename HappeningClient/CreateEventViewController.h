@@ -10,4 +10,6 @@
 
 @interface CreateEventViewController : UIViewController
 
+@property (nonatomic) int dayID;
+
 @end

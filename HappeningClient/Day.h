@@ -12,8 +12,9 @@
 
 @property (strong, nonatomic) NSDate *date;
 @property (strong, nonatomic) NSMutableArray *events;
+@property (nonatomic) int remoteID;
 
-- (id)initWithDate:(NSDate *)date;
-+ (id)initWithDate:(NSDate *)date;
+- (id)initWithDate:(NSDate *)date andRemoteID:(int)remoteID;
++ (id)initWithDate:(NSDate *)date andRemoteID:(int)remoteID;
 
 @end

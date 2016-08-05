@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CreateHappeningViewController.h"
 
-@interface HappeningsTableViewController : UITableViewController <happeningTableViewDelegate>
+@interface HappeningsTableViewController : UITableViewController <HappeningTableViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray *happenings;
 

@@ -10,17 +10,18 @@
 
 @implementation ListForHappening
 
-- (id)initWithListName:(NSString *)name {
+- (id)initWithListName:(NSString *)name andID:(int)remoteID {
     self = [super init];
     
     if (self) {
         _name = name;
+        _remoteID = remoteID;
     }
     return self;
 }
 
-+ (id)initWithListName:(NSString *)name {
-    return [[super alloc] initWithListName:name];
++ (id)initWithListName:(NSString *)name andID:(int)remoteID {
+    return [[super alloc] initWithListName:name andID:remoteID];
     
 }
 

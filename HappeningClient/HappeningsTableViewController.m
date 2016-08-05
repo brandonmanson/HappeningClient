@@ -45,6 +45,8 @@
     if (token == nil || [decoder isExpired:token]) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         AuthenticationViewController *authVC = [storyboard instantiateViewControllerWithIdentifier:@"AuthenticationViewController"];
+        authVC.modalPresentationStyle = UIModalPresentationCurrentContext;
+        [self setDefinesPresentationContext:YES];
         [self presentViewController:authVC animated:YES completion:nil];
     }
 }
@@ -52,6 +54,7 @@
 #pragma mark - Delegate Methods
 
 - (void)getNewHappeningsAndReloadView {
+    NSLog(@"Method called");
     _happenings = [[NSMutableArray alloc] init];
     A0SimpleKeychain *keychain = [A0SimpleKeychain keychain];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -64,7 +67,7 @@
         NSDictionary *response = (NSDictionary *)responseObject;
         for (id key in response) {
             Happening *newHappening = [self createNewHappeningFromDictionary:key];
-            NSLog(@"happening id: %i", newHappening.happeningId);
+            NSLog(@"happening name: %@", newHappening.name);
             [_happenings addObject:newHappening];
         }
         [self.tableView reloadData];
