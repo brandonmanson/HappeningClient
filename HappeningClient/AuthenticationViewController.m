@@ -26,6 +26,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _loginOrSignUpSegmentedControl.tintColor = [UIColor redColor];
+    _usernameTextBox.borderStyle = UITextBorderStyleNone;
+    _passwordTextBox.borderStyle = UITextBorderStyleNone;
+    _emailTextBox.borderStyle = UITextBorderStyleNone;
     
     // Do any additional setup after loading the view.
 }

@@ -45,7 +45,7 @@
     if (token == nil || [decoder isExpired:token]) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         AuthenticationViewController *authVC = [storyboard instantiateViewControllerWithIdentifier:@"AuthenticationViewController"];
-        authVC.modalPresentationStyle = UIModalPresentationCurrentContext;
+        authVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         [self setDefinesPresentationContext:YES];
         [self presentViewController:authVC animated:YES completion:nil];
     }

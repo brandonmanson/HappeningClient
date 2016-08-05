@@ -10,6 +10,8 @@
 #import <AFNetworking/AFNetworking.h>
 #import <SimpleKeychain/SimpleKeychain.h>
 #import "CreateListViewController.h"
+#import "EventsTableViewController.h"
+#import "Day.h"
 
 @interface DaysViewController ()
 @property (strong, nonatomic) IBOutlet UISegmentedControl *daysOrListsSegmentedControl;
@@ -21,6 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _daysOrListsSegmentedControl.tintColor = [UIColor redColor];
     [self getDaysForHappening:_happeningID];
     // Do any additional setup after loading the view.
 }
@@ -55,9 +58,7 @@
             [_days addObject:newDay];
             NSLog(@"%@", _days.description);
         }
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            [_tableView reloadData];
-        });
+        [_tableView reloadData];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"Error: %@", error.localizedDescription);
     }];
@@ -163,11 +164,11 @@
     
     if ([_daysOrListsSegmentedControl selectedSegmentIndex] == 0) {
         
-        [self performSegueWithIdentifier:@"showEventsSegue" sender:self];
+        [self performSegueWithIdentifier:@"showEventsSegue" sender:indexPath];
         
     } else if ([_daysOrListsSegmentedControl selectedSegmentIndex] == 1) {
         
-        [self performSegueWithIdentifier:@"showListItemsSegue" sender:self];
+        [self performSegueWithIdentifier:@"showListItemsSegue" sender:indexPath];
     
     }
 }
@@ -193,9 +194,15 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    NSIndexPath *indexPath = sender;
     if ([segue.identifier isEqualToString:@"createNewListSegue"]) {
         CreateListViewController *vc = [segue destinationViewController];
         vc.happeningID = _happeningID;
+    } else if ([segue.identifier isEqualToString:@"showEventsSegue"]) {
+        Day *selectedDay = [_days objectAtIndex:indexPath.row];
+        EventsTableViewController *vc = [segue destinationViewController];
+        vc.date = selectedDay.date;
+        vc.dayID = selectedDay.remoteID;
     }
 }
 
