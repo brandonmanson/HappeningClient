@@ -9,6 +9,7 @@
 #import "CreateHappeningViewController.h"
 #import <AFNetworking/AFNetworking.h>
 #import <UIKit/UIKit.h>
+#import <SimpleKeychain/SimpleKeychain.h>
 
 @interface CreateHappeningViewController ()
 @property (strong, nonatomic) IBOutlet UITextField *happeningNameTextField;
@@ -18,10 +19,11 @@
 
 @end
 
-@implementation CreateHappeningViewController
+@implementation CreateHappeningViewController 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     _formatter = [[NSDateFormatter alloc] init];
     [_formatter setDateStyle:NSDateFormatterLongStyle];
     
@@ -105,6 +107,8 @@
 }
 
 - (void)createHappeningAndDatesWithData:(NSDictionary *)happeningData {
+    A0SimpleKeychain *keychain = [A0SimpleKeychain keychain];
+    NSString *authHeader = [NSString stringWithFormat:@"Bearer %@", [keychain stringForKey:@"token"]];
     NSString *createHappeningAPIRoute = @"http://localhost:3000/happenings";
     
     NSString *createDayAPIRoute = @"http://localhost:3000/days";
@@ -114,22 +118,30 @@
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    
+    [manager.requestSerializer setValue:authHeader forHTTPHeaderField:@"Authorization"];
     [manager POST:createHappeningAPIRoute parameters:happeningData progress:nil success:^(NSURLSessionTask *task, id responseObject) {
         NSDictionary *happeningResponseObject = (NSDictionary *)responseObject;
         NSLog(@"Happening created! %@", happeningResponseObject.description);
         id happeningId = [happeningResponseObject objectForKey:@"id"];
+        NSLog(@"happening id: %@", happeningId);
         
         for (NSDate *date in _dates) {
             NSLog(@"in for loop");
             NSString *dateString = [formatter stringFromDate:date];
             NSDictionary *newDayObjectData = @{@"day": @{@"date": dateString, @"happening_id": happeningId}};
+            NSLog(@"request params: %@", newDayObjectData.description);
             [manager POST:createDayAPIRoute parameters:newDayObjectData progress:nil success:^(NSURLSessionTask *task, id responseObject) {
                 NSDictionary *response = (NSDictionary *)responseObject;
                 NSLog(@"Day created! %@", response.description);
             } failure:^(NSURLSessionTask *task, NSError *error) {
                 NSLog(@"Day not created. Error: %@", error.localizedDescription);
             }];
+        }
+        if ([self.delegate respondsToSelector:@selector(getNewHappeningsAndReloadView)]) {
+            NSLog(@"Delegate responds to selector");
+            [_delegate getNewHappeningsAndReloadView];
+        } else {
+            NSLog(@"Delegate not responding to selector");
         }
         
     } failure:^(NSURLSessionTask *task, NSError *error) {
@@ -138,15 +150,24 @@
 }
 
 - (IBAction)createHappeningButtonPressed:(UIButton *)sender {
+    NSLog(@"A delegate :%@",self.delegate);
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd"];
     
     NSString *startDate = [formatter stringFromDate:_startDate];
     NSString *endDate = [formatter stringFromDate:_endDate];
-    NSDictionary *happeningData = @{@"happening": @{@"name": _happeningNameTextField.text, @"start_date": startDate, @"end_date": endDate}};
+    NSDictionary *happeningData = @{@"happening":
+                                        @{@"name": _happeningNameTextField.text,
+                                          @"start_date": startDate,
+                                          @"end_date": endDate,
+                                          @"user_ids": @[
+                                                  [defaults objectForKey:@"id"]
+                                                  ]
+                                          }
+                                    };
     [self generateDatesBetweenStartDate:_startDate andEndDate:_endDate];
     [self createHappeningAndDatesWithData:happeningData];
-    [_delegate getNewHappeningsAndReloadView];
     
 }
 

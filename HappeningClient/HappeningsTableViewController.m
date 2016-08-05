@@ -9,7 +9,7 @@
 #import "HappeningsTableViewController.h"
 #import <AFNetworking/AFNetworking.h>
 #import "Happening.h"
-#import "DaysTableViewController.h"
+#import "DaysViewController.h"
 #import "CreateHappeningViewController.h"
 #import "AuthenticationViewController.h"
 #import <SimpleKeychain/SimpleKeychain.h>
@@ -24,6 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self getNewHappeningsAndReloadView];
+    self.navigationController.navigationBar.tintColor = [UIColor redColor];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -45,6 +46,8 @@
     if (token == nil || [decoder isExpired:token]) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         AuthenticationViewController *authVC = [storyboard instantiateViewControllerWithIdentifier:@"AuthenticationViewController"];
+        authVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        [self setDefinesPresentationContext:YES];
         [self presentViewController:authVC animated:YES completion:nil];
     }
 }
@@ -52,19 +55,20 @@
 #pragma mark - Delegate Methods
 
 - (void)getNewHappeningsAndReloadView {
+    NSLog(@"Method called");
     _happenings = [[NSMutableArray alloc] init];
     A0SimpleKeychain *keychain = [A0SimpleKeychain keychain];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *authHeader = [NSString stringWithFormat:@"Bearer %@", [keychain stringForKey:@"token"]];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager.requestSerializer setValue:authHeader forHTTPHeaderField:@"Authorization"];
-    NSString *getHappeningsURL = @"http://localhost:3000/users?id=1";
-    
+    NSString *getHappeningsURL = [NSString stringWithFormat:@"http://localhost:3000/users?id=%@", [defaults stringForKey:@"id"]];
     [manager GET:getHappeningsURL parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSDictionary *response = (NSDictionary *)responseObject;
         for (id key in response) {
             Happening *newHappening = [self createNewHappeningFromDictionary:key];
-            NSLog(@"happening id: %i", newHappening.happeningId);
+            NSLog(@"happening name: %@", newHappening.name);
             [_happenings addObject:newHappening];
         }
         [self.tableView reloadData];
@@ -153,13 +157,16 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     if ([[segue identifier] isEqualToString:@"createHappeningSegue"]) {
         CreateHappeningViewController *vc = [segue destinationViewController];
         [vc setDelegate:self];
+    } else {        
+        DaysViewController *vc = [segue destinationViewController];
+        Happening *selectedHappening = [_happenings objectAtIndex:indexPath.row];
+        NSLog(@"selected Happening: %@", selectedHappening);
+        vc.happeningID = selectedHappening.happeningId;
     }
-    DaysTableViewController *vc = [segue destinationViewController];
 }
 
 - (IBAction)prepareForUnwind:(UIStoryboardSegue *)segue {

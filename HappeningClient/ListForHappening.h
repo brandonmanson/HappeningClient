@@ -12,8 +12,9 @@
 
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSMutableArray *items;
+@property (nonatomic) int remoteID;
 
-- (id)initWithListName:(NSString *)name;
-+ (id)initWithListName:(NSString *)name;
+- (id)initWithListName:(NSString *)name andID:(int)remoteID;
++ (id)initWithListName:(NSString *)name andID:(int)remoteID;
 
 @end

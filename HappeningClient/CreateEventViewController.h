@@ -8,6 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol UpdateEventListDelegate <NSObject>
+
+- (void)updateEventList;
+
+@end
+
 @interface CreateEventViewController : UIViewController
+
+@property (nonatomic) int dayID;
+@property (strong, nonatomic) NSDate *date;
+@property (strong, nonatomic) UIDatePicker *startTimePicker;
+@property (strong, nonatomic) UIToolbar *startTimePickerToolbar;
+@property (strong, nonatomic) NSDate *dateToPass;
+@property (strong, nonatomic) id<UpdateEventListDelegate>delegate;
 
 @end

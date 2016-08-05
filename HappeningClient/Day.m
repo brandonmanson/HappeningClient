@@ -10,17 +10,18 @@
 
 @implementation Day
 
-- (id)initWithDate:(NSDate *)date {
+- (id)initWithDate:(NSDate *)date andRemoteID:(int)remoteID {
     self = [super init];
     
     if (self) {
         _date = date;
+        _remoteID = remoteID;
     }
     return self;
 }
 
-+ (id)initWithDate:(NSDate *)date {
-    return [[super alloc] initWithDate:date];
++ (id)initWithDate:(NSDate *)date andRemoteID:(int)remoteID {
+    return [[super alloc] initWithDate:date andRemoteID:remoteID];
 }
 
 @end

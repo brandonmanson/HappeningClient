@@ -10,6 +10,7 @@
 #import <AFNetworking/AFNetworking.h>
 #import <SimpleKeychain/SimpleKeychain.h>
 #import "HappeningsTableViewController.h"
+#import "HappeningClient-Swift.h"
 
 
 @interface AuthenticationViewController ()
@@ -25,7 +26,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    _loginOrSignUpSegmentedControl.tintColor = [UIColor redColor];
+    _usernameTextBox.borderStyle = UITextBorderStyleNone;
+    _passwordTextBox.borderStyle = UITextBorderStyleNone;
+    _emailTextBox.borderStyle = UITextBorderStyleNone;
     
     // Do any additional setup after loading the view.
 }
@@ -96,6 +100,8 @@
 - (void)authenticateExistingUser {
     // Keychain access for JWT and password
     A0SimpleKeychain *keychain = [A0SimpleKeychain keychain];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    HappeningJWTDecoder *decoder = [[HappeningJWTDecoder alloc] init];
     
     NSString *authenticateURL = @"http://localhost:3000/user_token";
     
@@ -105,8 +111,17 @@
     [manager POST:authenticateURL parameters:newTokenParams progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSLog(@"token: %@", responseObject[@"jwt"]);
         [keychain setString:responseObject[@"jwt"] forKey:@"token"];
+        [keychain setString:_passwordTextBox.text forKey:@"password"];
+        
+        int userID = [decoder returnUserId:responseObject[@"jwt"]];
+        
+        [defaults setObject:[NSNumber numberWithInt:userID] forKey:@"id"];
+        [defaults setObject:_emailTextBox.text forKey:@"email"];
+        
+        NSLog(@"presenting vc: %@", self.presentingViewController.description);
         [(HappeningsTableViewController *)self.presentingViewController getNewHappeningsAndReloadView];
         [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"Error: %@", error.localizedDescription);
     }];

@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Day.h"
+#import "Event.h"
+#import "CreateEventViewController.h"
 
-@interface EventsTableViewController : UITableViewController
+@interface EventsTableViewController : UITableViewController <UpdateEventListDelegate>
+
+@property (strong, nonatomic) NSMutableArray *events;
+@property (nonatomic) int dayID;
+@property (strong, nonatomic) NSDate *date;
 
 @end

@@ -1,18 +1,19 @@
 //
-//  DaysTableViewController.m
+//  PeopleTableViewController.m
 //  HappeningClient
 //
-//  Created by Brandon Manson on 7/27/16.
+//  Created by Brandon Manson on 8/4/16.
 //  Copyright © 2016 DetroitLabs. All rights reserved.
 //
 
-#import "DaysTableViewController.h"
+#import "PeopleTableViewController.h"
+#import "SearchTableTableViewController.h"
 
-@interface DaysTableViewController ()
+@interface PeopleTableViewController ()
 
 @end
 
-@implementation DaysTableViewController
+@implementation PeopleTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,6 +29,29 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - Search Bar
+
+- (void)instantiateSearchTable {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    SearchTableTableViewController *searchTable = (SearchTableTableViewController *)[storyboard instantiateViewControllerWithIdentifier:@"PeopleSearchTable"];
+    _peopleSearchController = [[UISearchController alloc] initWithSearchResultsController:searchTable];
+    _peopleSearchController.searchResultsUpdater = searchTable;
+}
+
+- (void)configureSearchBar {
+    UISearchBar *personSearchBar = _peopleSearchController.searchBar;
+    [personSearchBar sizeToFit];
+    personSearchBar.placeholder = @"Find someone and add them to this Happening";
+    personSearchBar.searchBarStyle = UISearchBarStyleMinimal;
+    self.navigationItem.titleView = _peopleSearchController.searchBar;
+    _peopleSearchController.hidesNavigationBarDuringPresentation = NO;
+    _peopleSearchController.dimsBackgroundDuringPresentation = YES;
+    self.definesPresentationContext = YES;
+}
+
+#pragma mark - API Calls
+
 
 #pragma mark - Table view data source
 
