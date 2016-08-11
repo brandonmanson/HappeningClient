@@ -7,6 +7,8 @@
 //
 
 #import "ListTableViewController.h"
+#import <AFNetworking/AFNetworking.h>
+#import <SimpleKeychain/SimpleKeychain.h>
 
 @interface ListTableViewController ()
 
@@ -16,6 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self getListItemsAndUpdateList];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -29,27 +32,54 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Delegate Method
+
+- (void)getListItemsAndUpdateList {
+    _listItems = [[NSMutableArray alloc] init];
+    
+    A0SimpleKeychain *keychain = [A0SimpleKeychain keychain];
+    NSString *authHeader = [NSString stringWithFormat:@"Bearer %@", [keychain stringForKey:@"token"]];
+    NSString *requestURL = [NSString stringWithFormat:@"http://localhost:3000/list_items?list_id=%i", _listID];
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setValue:authHeader forHTTPHeaderField:@"Authorization"];
+    
+    
+    [manager GET:requestURL parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSDictionary *response = (NSDictionary *)responseObject;
+        for (id key in response) {
+            ListItem *newListItem = [[ListItem alloc] initWithItemDescription:key[@"description"] andName:key[@"name"]];
+            [_listItems addObject:newListItem];
+        }
+        [self.tableView reloadData];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"Error: %@", error.localizedDescription);
+    }];
+    
+    
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    return [_listItems count];
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"listItemCell" forIndexPath:indexPath];
     
-    // Configure the cell...
+    ListItem *itemInCell = [_listItems objectAtIndex:indexPath.row];
+    cell.textLabel.text = itemInCell.name;
     
     return cell;
 }
-*/
+
 
 /*
 // Override to support conditional editing of the table view.
@@ -85,14 +115,18 @@
 }
 */
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"createListItemSegue"]) {
+        CreateListItemViewController *vc = [segue destinationViewController];
+        vc.listID = _listID;
+        [vc setDelegate:self];
+    }
 }
-*/
+
 
 @end

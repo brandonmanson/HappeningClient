@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ListForHappening.h"
+#import "CreateListItemViewController.h"
+#import "ListItem.h"
 
-@interface ListTableViewController : UITableViewController
+@interface ListTableViewController : UITableViewController <CreateListItemDelegate>
+
+@property (strong, nonatomic) NSMutableArray *listItems;
+@property (nonatomic) int listID;
 
 @end

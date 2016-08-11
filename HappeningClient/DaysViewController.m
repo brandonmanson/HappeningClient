@@ -12,6 +12,7 @@
 #import "CreateListViewController.h"
 #import "EventsTableViewController.h"
 #import "Day.h"
+#import "ListTableViewController.h"
 
 @interface DaysViewController ()
 @property (strong, nonatomic) IBOutlet UISegmentedControl *daysOrListsSegmentedControl;
@@ -203,6 +204,10 @@
         EventsTableViewController *vc = [segue destinationViewController];
         vc.date = selectedDay.date;
         vc.dayID = selectedDay.remoteID;
+    } else if ([segue.identifier isEqualToString:@"showListItemsSegue"]) {
+        ListForHappening *selectedList = [_lists objectAtIndex:indexPath.row];
+        ListTableViewController *vc = [segue destinationViewController];
+        vc.listID = selectedList.remoteID;
     }
 }
 

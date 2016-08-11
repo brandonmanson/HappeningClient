@@ -19,7 +19,6 @@
 		9494829A1D4E30DC00E36282 /* Day.m in Sources */ = {isa = PBXBuildFile; fileRef = 949482991D4E30DC00E36282 /* Day.m */; };
 		9494829D1D4E30E600E36282 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 9494829C1D4E30E600E36282 /* Event.m */; };
 		949482A01D4E310000E36282 /* ListForHappening.m in Sources */ = {isa = PBXBuildFile; fileRef = 9494829F1D4E310000E36282 /* ListForHappening.m */; };
-		949482A31D4E311F00E36282 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 949482A21D4E311F00E36282 /* Item.m */; };
 		949482A61D4EBDAB00E36282 /* AuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 949482A51D4EBDAB00E36282 /* AuthenticationViewController.m */; };
 		94C4E5901D33E0B600EAFC9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C4E58F1D33E0B600EAFC9A /* main.m */; };
 		94C4E5931D33E0B600EAFC9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C4E5921D33E0B600EAFC9A /* AppDelegate.m */; };
@@ -33,6 +32,7 @@
 		94F490D91D495BAC000FB399 /* CreateHappeningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F490D81D495BAC000FB399 /* CreateHappeningViewController.m */; };
 		94F490DC1D495BBD000FB399 /* CreateEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F490DB1D495BBD000FB399 /* CreateEventViewController.m */; };
 		94F490DF1D495BD9000FB399 /* EventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F490DE1D495BD9000FB399 /* EventDetailViewController.m */; };
+		94F663411D5BF7D300F7C537 /* ListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F663401D5BF7D300F7C537 /* ListItem.m */; };
 		E0263B9A949B6D81669D53E1 /* Pods_HappeningClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64BB997B0AB07684A929148E /* Pods_HappeningClient.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,8 +62,6 @@
 		9494829C1D4E30E600E36282 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		9494829E1D4E310000E36282 /* ListForHappening.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListForHappening.h; sourceTree = "<group>"; };
 		9494829F1D4E310000E36282 /* ListForHappening.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListForHappening.m; sourceTree = "<group>"; };
-		949482A11D4E311F00E36282 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
-		949482A21D4E311F00E36282 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
 		949482A41D4EBDAB00E36282 /* AuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationViewController.h; sourceTree = "<group>"; };
 		949482A51D4EBDAB00E36282 /* AuthenticationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationViewController.m; sourceTree = "<group>"; };
 		94C4E58B1D33E0B600EAFC9A /* HappeningClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappeningClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,6 +88,8 @@
 		94F490DB1D495BBD000FB399 /* CreateEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateEventViewController.m; sourceTree = "<group>"; };
 		94F490DD1D495BD9000FB399 /* EventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailViewController.h; sourceTree = "<group>"; };
 		94F490DE1D495BD9000FB399 /* EventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailViewController.m; sourceTree = "<group>"; };
+		94F6633F1D5BF7B300F7C537 /* ListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListItem.h; sourceTree = "<group>"; };
+		94F663401D5BF7D300F7C537 /* ListItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,8 +126,8 @@
 				9494829C1D4E30E600E36282 /* Event.m */,
 				9494829E1D4E310000E36282 /* ListForHappening.h */,
 				9494829F1D4E310000E36282 /* ListForHappening.m */,
-				949482A11D4E311F00E36282 /* Item.h */,
-				949482A21D4E311F00E36282 /* Item.m */,
+				94F6633F1D5BF7B300F7C537 /* ListItem.h */,
+				94F663401D5BF7D300F7C537 /* ListItem.m */,
 				943A19311D523F8E00D60AB2 /* User.h */,
 				943A19321D523F8E00D60AB2 /* User.m */,
 			);
@@ -341,11 +341,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				949482A31D4E311F00E36282 /* Item.m in Sources */,
 				94F490D61D495B6F000FB399 /* EventsTableViewController.m in Sources */,
 				943A193C1D539F8900D60AB2 /* CreateListItemViewController.m in Sources */,
 				94C4E5931D33E0B600EAFC9A /* AppDelegate.m in Sources */,
 				943A19481D53BB1200D60AB2 /* PeopleTableViewController.m in Sources */,
+				94F663411D5BF7D300F7C537 /* ListItem.m in Sources */,
 				949482A01D4E310000E36282 /* ListForHappening.m in Sources */,
 				943A19331D523F8E00D60AB2 /* User.m in Sources */,
 				94C4E5901D33E0B600EAFC9A /* main.m in Sources */,

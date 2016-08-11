@@ -8,8 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol CreateListItemDelegate <NSObject>
+
+- (void)getListItemsAndUpdateList;
+
+@end
+
 @interface CreateListItemViewController : UIViewController
 
 @property (nonatomic) int listID;
+@property (strong, nonatomic) id<CreateListItemDelegate>delegate;
 
 @end
