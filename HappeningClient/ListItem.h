@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Item : NSObject
+@interface ListItem : NSObject
 
 @property (strong, nonatomic) NSString *itemDescription;
+@property (strong, nonatomic) NSString *name;
 
-- (id)initWithItemDescription:(NSString *)description;
-+ (id)initWithItemDescription:(NSString *)description;
+- (id)initWithItemDescription:(NSString *)description andName:(NSString *)name;
++ (id)initWithItemDescription:(NSString *)description andName:(NSString *)name;
 
 @end
