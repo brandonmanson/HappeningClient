@@ -336,6 +336,10 @@
                                             <segue destination="b3P-9G-c1V" kind="show" identifier="createNewListSegue" id="onA-Cr-Xfb"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="auW-HR-pgm"/>
+                                    <barButtonItem title="Invite Someone" id="RCW-1P-C60">
+                                        <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="dRS-A3-qiD"/>
                                 </items>
                             </toolbar>
@@ -537,10 +541,10 @@
             </objects>
             <point key="canvasLocation" x="2387" y="357"/>
         </scene>
-        <!--Search Table View Controller-->
+        <!--Users Table View Controller-->
         <scene sceneID="PTs-G6-TY7">
             <objects>
-                <tableViewController id="7gM-vW-XwJ" customClass="SearchTableViewController" sceneMemberID="viewController">
+                <tableViewController id="7gM-vW-XwJ" customClass="UsersTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="VRf-TD-Uyf">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

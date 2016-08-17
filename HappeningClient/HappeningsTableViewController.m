@@ -65,6 +65,7 @@
     [manager.requestSerializer setValue:authHeader forHTTPHeaderField:@"Authorization"];
     NSString *getHappeningsURL = [NSString stringWithFormat:@"http://localhost:3000/users?id=%@", [defaults stringForKey:@"id"]];
     [manager GET:getHappeningsURL parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSLog(@"Response: \n%@", responseObject);
         NSDictionary *response = (NSDictionary *)responseObject;
         for (id key in response) {
             Happening *newHappening = [self createNewHappeningFromDictionary:key];
