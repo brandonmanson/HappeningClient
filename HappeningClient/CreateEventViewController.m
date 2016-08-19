@@ -56,7 +56,7 @@
     NSLog(@"_date: %@", _date.description);
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     [calendar setTimeZone:[NSTimeZone timeZoneWithName: @"US/Eastern"]];
-    NSDateComponents *comps = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:_date];
+    NSDateComponents *comps = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitTimeZone) fromDate:_date];
     NSLog(@"comps: %@", comps.description);
     NSDateComponents *timeComps = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:_startTimePicker.date];
     [comps setHour:timeComps.hour];
