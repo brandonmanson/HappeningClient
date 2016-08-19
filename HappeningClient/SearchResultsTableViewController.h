@@ -10,4 +10,6 @@
 
 @interface SearchResultsTableViewController : UITableViewController
 
+@property (strong, nonatomic) NSArray *filteredUsers;
+
 @end

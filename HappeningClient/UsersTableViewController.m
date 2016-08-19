@@ -30,7 +30,9 @@
     [self populateTable];
     [self.tableView reloadData];
     
-    _resultsTableController = [[SearchResultsTableViewController alloc] init];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    _resultsTableController = (SearchResultsTableViewController *)[storyboard instantiateViewControllerWithIdentifier:@"SearchResultsTableViewController"];
     _searchController = [[UISearchController alloc] initWithSearchResultsController:self.resultsTableController];
     self.searchController.searchResultsUpdater = self;
     [self.searchController.searchBar sizeToFit];
@@ -76,19 +78,22 @@
     A0SimpleKeychain *keychain = [A0SimpleKeychain keychain];
     NSString *authHeader = [NSString stringWithFormat:@"Bearer %@", [keychain stringForKey:@"token"]];
     
-    NSString *requestURL = [NSString stringWithFormat:@"http://localhost::3000/happenings/%i", _happeningID];
+    NSString *requestURL = [NSString stringWithFormat:@"http://localhost:3000/happenings/%i", _happeningID];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager.requestSerializer setValue:authHeader forHTTPHeaderField:@"Authorization"];
     
     [manager GET:requestURL parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSLog(@"users in happening:\n%@", responseObject);
+        
         NSDictionary *response = (NSDictionary *)responseObject;
         
         for (id key in response) {
             User *newUser = [[User alloc] initWithUsername:key[@"username"] andEmail:key[@"email"] withRemoteID:[key[@"id"] integerValue]];
             [_usersInHappening addObject:newUser];
         }
+        [self.tableView reloadData];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"Error: %@", error.localizedDescription);
     }];
@@ -100,19 +105,21 @@
     A0SimpleKeychain *keychain = [A0SimpleKeychain keychain];
     NSString *authHeader = [NSString stringWithFormat:@"Bearer %@", [keychain stringForKey:@"token"]];
     
-    NSString *requestURL = @"http:://localhost::3000/users";
+    NSString *requestURL = @"http://localhost:3000/users";
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager.requestSerializer setValue:authHeader forHTTPHeaderField:@"Authorization"];
     
     [manager GET:requestURL parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSLog(@"all users:\n%@", responseObject);
         NSDictionary *response = (NSDictionary *)responseObject;
         
         for (id key in response) {
             User *newUser = [[User alloc] initWithUsername:key[@"username"] andEmail:key[@"email"] withRemoteID:[key[@"id"] integerValue]];
             [_allUsers addObject:newUser];
         }
+        [self.tableView reloadData];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"Error:: %@", error.localizedDescription);
     }];
@@ -171,6 +178,14 @@
     }
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return @"Participants";
+    } else {
+        return @"All Users";
+    }
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"userCell" forIndexPath:indexPath];
@@ -182,8 +197,32 @@
     } else {
         userInCell = [_allUsers objectAtIndex:indexPath.row];
     }
-    
+    cell.textLabel.text = userInCell.username;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    User *selectedUser;
+    
+    if (tableView == self.tableView) {
+        
+        if (indexPath.section == 0) {
+            
+            selectedUser = [_usersInHappening objectAtIndex:indexPath.row];
+            
+        } else {
+            
+            selectedUser = [_allUsers objectAtIndex:indexPath.row];
+            
+        }
+    
+    } else {
+        
+        selectedUser = [_resultsTableController.filteredUsers objectAtIndex:indexPath.row];
+        
+    }
+    
 }
 
 /*
@@ -219,6 +258,51 @@
     return YES;
 }
 */
+
+#pragma mark - UISearchResultsUpdating
+
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    
+    NSString *searchText = searchController.searchBar.text;
+    NSMutableArray *searchResults = [_allUsers mutableCopy];
+    
+    NSLog(@"search results array:\n%@", searchResults.description);
+    
+    NSString *normalizedString = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    NSArray *searchItems = nil;
+    if (normalizedString.length > 0) {
+        searchItems = [normalizedString componentsSeparatedByString:@" "];
+    }
+    
+    NSLog(@"search items:\n%@", searchItems.description);
+    
+    
+    NSMutableArray *andMatchPredicates = [NSMutableArray array];
+    
+    for (NSString *searchString in searchItems) {
+        
+        NSMutableArray *searchItemsPredicate = [NSMutableArray array];
+        
+        NSExpression *leftSide = [NSExpression expressionForKeyPath:@"username"];
+        NSExpression *rightSide = [NSExpression expressionForConstantValue:searchString];
+        NSPredicate *finalPredicate = [NSComparisonPredicate predicateWithLeftExpression:leftSide rightExpression:rightSide modifier:NSDirectPredicateModifier type:NSContainsPredicateOperatorType options:NSCaseInsensitivePredicateOption];
+        [searchItemsPredicate addObject:finalPredicate];
+        
+        NSCompoundPredicate *orMatchPredicates = [NSCompoundPredicate orPredicateWithSubpredicates:searchItemsPredicate];
+        [andMatchPredicates addObject:orMatchPredicates];
+    }
+    
+    NSCompoundPredicate *finalCompoundPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:andMatchPredicates];
+    searchResults = [[searchResults filteredArrayUsingPredicate:finalCompoundPredicate] mutableCopy];
+    
+    NSLog(@"search results: %@", searchResults.description);
+    
+    SearchResultsTableViewController *tableController = (SearchResultsTableViewController *)self.searchController.searchResultsController;
+    tableController.filteredUsers = searchResults;
+    [tableController.tableView reloadData];
+    
+}
 
 /*
 #pragma mark - Navigation

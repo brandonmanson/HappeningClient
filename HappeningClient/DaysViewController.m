@@ -13,7 +13,7 @@
 #import "EventsTableViewController.h"
 #import "Day.h"
 #import "ListTableViewController.h"
-#import "UsersTableViewController.m"
+#import "UsersTableViewController.h"
 
 @interface DaysViewController ()
 @property (strong, nonatomic) IBOutlet UISegmentedControl *daysOrListsSegmentedControl;
@@ -209,7 +209,7 @@
         ListForHappening *selectedList = [_lists objectAtIndex:indexPath.row];
         ListTableViewController *vc = [segue destinationViewController];
         vc.listID = selectedList.remoteID;
-    } else if ([segue.identifier isEqualToString:@"goToUsersSegue"]) {
+    } else if ([segue.identifier isEqualToString:@"goToUsersTableViewController"]) {
         UsersTableViewController *vc = [segue destinationViewController];
         vc.happeningID = _happeningID;
     }
